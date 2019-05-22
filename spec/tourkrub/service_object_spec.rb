@@ -9,9 +9,13 @@ RSpec.describe Tourkrub::Toolkit::ServiceObject do
         attribute :value, Types::Strict::Integer
       end
 
+      declare_output do
+        attribute :data, Types::Strict::Integer
+      end
+
       def process
-        result = input.value + 1
-        assign_result(result)
+        added_value = input.value + 1
+        assign_output(data: added_value)
       end
     end
   end
@@ -21,7 +25,7 @@ RSpec.describe Tourkrub::Toolkit::ServiceObject do
       it "return success? true" do
         service = ServiceObjectSpec.process(value: 1)
 
-        expect(service.result).to eq(2)
+        expect(service.output.data).to eq(2)
         expect(service.success?).to be true
       end
     end
@@ -30,7 +34,7 @@ RSpec.describe Tourkrub::Toolkit::ServiceObject do
       it "return success? false" do
         service = ServiceObjectSpec.process(1)
 
-        expect(service.result).to be nil
+        expect(service.output).to be nil
         expect(service.success?).to be false
         expect(service.error.class).to eq(Dry::Struct::Error)
       end
@@ -41,7 +45,7 @@ RSpec.describe Tourkrub::Toolkit::ServiceObject do
     it "return success? true" do
       service = ServiceObjectSpec.process!(value: 1)
 
-      expect(service.result).to eq(2)
+      expect(service.output.data).to eq(2)
       expect(service.success?).to be true
     end
 
