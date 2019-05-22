@@ -27,10 +27,14 @@ module Tourkrub
           begin
             service.add_input(input_klass.new(args))
             service.process
-          rescue Dry::Struct::Error => exception
+          rescue StandardError => exception
             service.add_error(exception)
           end
           service
+        end
+
+        def process!(args)
+          process(args).tap { |service| raise service.error if service.error }
         end
 
         def input_klass

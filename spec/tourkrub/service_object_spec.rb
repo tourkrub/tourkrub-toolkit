@@ -35,15 +35,22 @@ RSpec.describe Tourkrub::Toolkit::ServiceObject do
         expect(service.error.class).to eq(Dry::Struct::Error)
       end
     end
+  end
 
-    context "with raised error" do
-      it "raise error" do
-        allow_any_instance_of(ServiceObjectSpec)
-          .to receive(:process).and_raise("oops")
+  describe "#process!" do
+    it "return success? true" do
+      service = ServiceObjectSpec.process!(value: 1)
 
-        expect { ServiceObjectSpec.process(value: 1) }
-          .to raise_error(RuntimeError, "oops")
-      end
+      expect(service.result).to eq(2)
+      expect(service.success?).to be true
+    end
+
+    it "raise error" do
+      allow_any_instance_of(ServiceObjectSpec)
+        .to receive(:process).and_raise("oops")
+
+      expect { ServiceObjectSpec.process!(value: 1) }
+        .to raise_error(RuntimeError, "oops")
     end
   end
 end
