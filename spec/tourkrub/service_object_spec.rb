@@ -11,7 +11,7 @@ RSpec.describe Tourkrub::Toolkit::ServiceObject do
 
       def process
         result = input.value + 1
-        add_result(result)
+        assign_result(result)
       end
     end
   end

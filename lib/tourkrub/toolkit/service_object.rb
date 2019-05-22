@@ -5,6 +5,10 @@ require "dry-struct"
 module Tourkrub
   module Toolkit
     module ServiceObject
+      class Error < StandardError
+        RESULT_IS_NOT_ASSIGNED = "Result is not assigned!"
+      end
+
       module Types
         include Dry::Types()
       end
@@ -25,10 +29,11 @@ module Tourkrub
         def process(args)
           service = new
           begin
-            service.add_input(input_klass.new(args))
+            service.assign_input(input_klass.new(args))
             service.process
+            service.validate_result
           rescue StandardError => exception
-            service.add_error(exception)
+            service.assign_error(exception)
           end
           service
         end
@@ -44,20 +49,24 @@ module Tourkrub
 
       attr_reader :input, :error, :result
 
-      def add_input(input)
+      def assign_input(input)
         @input = input
       end
 
-      def add_error(exception)
+      def assign_error(exception)
         @error = exception
       end
 
-      def add_result(result)
+      def assign_result(result)
         @result = result
       end
 
       def success?
         @error.nil?
+      end
+
+      def validate_result
+        raise Error, Error::RESULT_IS_NOT_ASSIGNED if success? && result.nil?
       end
     end
   end
