@@ -1,0 +1,68 @@
+Rails:
+  Enabled: true
+
+AllCops:
+  Exclude:
+    - 'vendor/**/*'
+    - 'db/**/*'
+    - 'bin/**/*'
+    - 'Gemfile'
+    - 'Gemfile.lock'
+    - 'Rakefile'
+    - 'Guardfile'
+    - 'config/application.rb'
+    - 'config/deploy.rb'
+    - 'config/deploy/*'
+    - 'config/initializers/**/*'
+    - 'node_modules/**/*'
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - 'config/routes.rb'
+    - 'spec/**/*'
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 130
+  Exclude:
+    - 'spec/**/*'
+  # most of the specs file have long line length but readability is still good
+  # candidate line can't be reduce, if reduce it will effect the application
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Layout/IndentArray:
+  Enabled: false
+
+Layout/IndentHash:
+  Enabled: false
+
+Layout/AlignParameters:
+  EnforcedStyle: with_first_parameter
+
+Layout/FirstParameterIndentation:
+  EnforcedStyle: consistent
