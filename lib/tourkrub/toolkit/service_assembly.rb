@@ -10,9 +10,8 @@ module Tourkrub
           base.include InstanceMethod
         end
       end
-      
-      module ClassMethod
 
+      module ClassMethod
         def stations
           @stations ||= []
         end
@@ -58,11 +57,9 @@ module Tourkrub
         end
 
         def get_value(input, value)
-          if value.is_a?(Symbol)
-            value.to_s.include?("context_") ? @input.context[value.to_s.gsub("context_","").to_sym] : input.send(value)
-          else
-            raise ArgumentError, "Station accepts only Symbol, use :context_foo_bar for static value"
-          end
+          raise ArgumentError, "Station accepts only Symbol, use :context_foo_bar for static value" unless value.is_a?(Symbol)
+
+          value.to_s.include?("context_") ? @input.context[value.to_s.gsub("context_", "").to_sym] : input.send(value)
         end
 
         alias map_output map_input

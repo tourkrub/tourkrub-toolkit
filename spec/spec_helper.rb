@@ -9,6 +9,8 @@ SimpleCov.start do
 end
 
 require "tourkrub/toolkit"
+require "sidekiq/testing"
+require "sidekiq/api"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
