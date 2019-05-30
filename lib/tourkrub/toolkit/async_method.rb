@@ -1,4 +1,3 @@
-require "byebug"
 require "sidekiq"
 
 module Tourkrub
