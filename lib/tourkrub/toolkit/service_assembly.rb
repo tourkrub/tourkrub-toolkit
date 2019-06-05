@@ -57,9 +57,14 @@ module Tourkrub
         end
 
         def get_value(input, value)
-          raise ArgumentError, "Station accepts only Symbol, use :context_foo_bar for static value" unless value.is_a?(Symbol)
-
-          value.to_s.include?("context_") ? @input.context[value.to_s.gsub("context_", "").to_sym] : input.send(value)
+          case value.class.name
+          when "Symbol"
+            value.to_s.include?("context_") ? @input.context[value.to_s.gsub("context_", "").to_sym] : input.send(value)
+          when "Proc"
+            value.call(input)
+          else
+            raise ArgumentError, "Station accepts only Symbol or Proc, use :context_foo_bar for static value"
+          end
         end
 
         alias map_output map_input

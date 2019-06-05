@@ -33,7 +33,7 @@ RSpec.describe Tourkrub::Toolkit::ServiceAssembly do
       end
 
       station AddoneServiceObjectSpec, value: :start_value
-      station AddoneServiceObjectSpec, value: :added_value
+      station AddoneServiceObjectSpec, value: proc { |output| output.added_value }
       station AddoneServiceObjectSpec, value: :added_value, extra_id: :context_extra_id
 
       finish_with end_value: :added_value
@@ -87,7 +87,7 @@ RSpec.describe Tourkrub::Toolkit::ServiceAssembly do
     context "invalid station argrument" do
       it "raise error" do
         expect { ToBreakServiceAssemblySpec.process!(start_value: 1, context: { extra_id: "1" }) }
-          .to raise_error(ArgumentError, "Station accepts only Symbol, use :context_foo_bar for static value")
+          .to raise_error(ArgumentError, "Station accepts only Symbol or Proc, use :context_foo_bar for static value")
       end
     end
   end
