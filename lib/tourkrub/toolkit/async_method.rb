@@ -1,3 +1,4 @@
+require 'base64'
 require "sidekiq"
 
 module Tourkrub
@@ -35,7 +36,7 @@ module Tourkrub
         include Sidekiq::Worker
 
         def perform(dumped_agent)
-          agent = Marshal.load(dumped_agent) # rubocop:disable Security/MarshalLoad
+          agent = Marshal.load(Base64.decode64(dumped_agent)) # rubocop:disable Security/MarshalLoad
           agent.do
         end
       end
@@ -87,7 +88,7 @@ module Tourkrub
         end
 
         def dumped_self
-          Marshal.dump(self)
+          Base64.encode64(Marshal.dump(self))
         end
       end
     end
