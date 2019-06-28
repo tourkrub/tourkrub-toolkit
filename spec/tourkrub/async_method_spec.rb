@@ -14,7 +14,7 @@ RSpec.describe Tourkrub::Toolkit::AsyncMethod do
       end
 
       def bar
-        puts 'Shoule not reach this line'        
+        puts "Shoule not reach this line"
       end
     end
   end
@@ -54,14 +54,14 @@ RSpec.describe Tourkrub::Toolkit::AsyncMethod do
       it "should work properly" do
         large_object = OpenStruct.new(
           originator: OpenStruct.new(
-            on: "user.reset_password_requested", 
-            request: {"message"=>{"id"=>2742, "email"=>"trin.p@tourkrub.co", "created_at"=>"2019-05-31 18:22:30 +0700", "updated_at"=>"2019-06-28 14:07:35 +0700", "name"=>"", "contact_number"=>"", "birth_date"=>nil, "avatar"=>{"url"=>"fallback/263x263.gif", "normal"=>{"url"=>"fallback/263x263.gif"}}, "topic_arn"=>nil, "phone"=>nil, "first_name"=>"", "last_name"=>""}, "meta"=>{"app"=>"tourkrub", "token"=>"7p-QXSyHokF7osB5BjpH"}}, 
-            event: "user.reset_password_requested", 
-            message: {"id"=>2742, "email"=>"trin.p@tourkrub.co", "created_at"=>"2019-05-31 18:22:30 +0700", "updated_at"=>"2019-06-28 14:07:35 +0700", "name"=>"", "contact_number"=>"", "birth_date"=>nil, "avatar"=>{"url"=>"fallback/263x263.gif", "normal"=>{"url"=>"fallback/263x263.gif"}}, "topic_arn"=>nil, "phone"=>nil, "first_name"=>"", "last_name"=>""}, 
-            meta: {"app"=>"tourkrub", "token"=>"7p-QXSyHokF7osB5BjpH"}, 
+            on: "user.reset_password_requested",
+            request: { "message" => { "id" => 2742, "email" => "trin.p@tourkrub.co", "created_at" => "2019-05-31 18:22:30 +0700", "updated_at" => "2019-06-28 14:07:35 +0700", "name" => "", "contact_number" => "", "birth_date" => nil, "avatar" => { "url" => "fallback/263x263.gif", "normal" => { "url" => "fallback/263x263.gif" } }, "topic_arn" => nil, "phone" => nil, "first_name" => "", "last_name" => "" }, "meta" => { "app" => "tourkrub", "token" => "7p-QXSyHokF7osB5BjpH" } },
+            event: "user.reset_password_requested",
+            message: { "id" => 2742, "email" => "trin.p@tourkrub.co", "created_at" => "2019-05-31 18:22:30 +0700", "updated_at" => "2019-06-28 14:07:35 +0700", "name" => "", "contact_number" => "", "birth_date" => nil, "avatar" => { "url" => "fallback/263x263.gif", "normal" => { "url" => "fallback/263x263.gif" } }, "topic_arn" => nil, "phone" => nil, "first_name" => "", "last_name" => "" },
+            meta: { "app" => "tourkrub", "token" => "7p-QXSyHokF7osB5BjpH" },
             from_agent: true
           ),
-          method_string: "reset_password_requested", 
+          method_string: "reset_password_requested",
           args: []
         )
         Sidekiq::Testing.inline! do
