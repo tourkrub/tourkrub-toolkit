@@ -13,34 +13,60 @@ RSpec.describe Tourkrub::Toolkit::Observor do
         "boo"
       end
     end
+  end
 
-    class ObservorSpec
-      include Tourkrub::Toolkit::Observor
+  context "passing reaction" do
+    describe "#observe" do
+      before do
+        class ObservorSpec
+          include Tourkrub::Toolkit::Observor
 
-      observe on: FooObservable, action: "bar", reaction: proc { |result| FooBarReaction.baz(result) }
+          observe on: FooObservable, action: "bar", reaction: proc { |result| FooBarReaction.baz(result) }
+        end
+      end
+
+      it "should execute reaction" do
+        expect(FooBarReaction).to receive(:baz).with("boo")
+
+        result = FooObservable.bar
+
+        expect(result).to eq("boo")
+      end
     end
   end
 
-  describe "#observe" do
-    it "should execute reaction" do
-      expect(FooBarReaction).to receive(:baz).with("boo")
+  context "passing block" do
+    describe "#observe" do
+      before do
+        class ObservorSpec
+          include Tourkrub::Toolkit::Observor
 
-      result = FooObservable.bar
+          observe on: FooObservable, action: "bar" do |result|
+            FooBarReaction.baz(result)
+          end
+        end
+      end
 
-      expect(result).to eq("boo")
+      it "should execute reaction" do
+        expect(FooBarReaction).to receive(:baz).with("boo")
+
+        result = FooObservable.bar
+
+        expect(result).to eq("boo")
+      end
     end
   end
 
   context "observe instance" do
     describe "#observe" do
       it "should raise" do
-        expect{
+        expect  do
           class ObservorSpec
             include Tourkrub::Toolkit::Observor
 
             observe on: FooObservable.new, action: "bar", reaction: proc { |result| FooBarReaction.baz(result) }
           end
-        }.to raise_error(Tourkrub::Toolkit::Observor::IsNotObservable)
+        end.to raise_error(Tourkrub::Toolkit::Observor::IsNotObservable)
       end
     end
   end
