@@ -70,4 +70,28 @@ RSpec.describe Tourkrub::Toolkit::Observor do
       end
     end
   end
+
+  context "disabled" do
+    before do
+      Tourkrub::Toolkit::Observor.disable!
+
+      class ObservorSpec
+        include Tourkrub::Toolkit::Observor
+
+        observe on: FooObservable, action: "bar" do |result|
+          FooBarReaction.baz(result)
+        end
+      end
+    end
+
+    describe "#observe" do
+      it "should not work" do
+        expect(FooBarReaction).not_to receive(:baz).with("boo")
+
+        result = FooObservable.bar
+
+        expect(result).to eq("boo")
+      end
+    end
+  end
 end

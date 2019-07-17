@@ -7,10 +7,19 @@ module Tourkrub
         def included(base)
           base.extend(ClassMethod)
         end
+
+        def disable!
+          @disable = true
+        end
+
+        def disabled?
+          @disable
+        end
       end
 
       module ClassMethod
         def observe(on:, action:, reaction: nil)
+          return if Tourkrub::Toolkit::Observor.disabled?
           raise IsNotObservable, "#{on} is not supported" unless on.is_a?(Class)
 
           if block_given?
