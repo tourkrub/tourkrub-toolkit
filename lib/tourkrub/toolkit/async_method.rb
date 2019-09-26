@@ -17,7 +17,7 @@ module Tourkrub
           method_string = method_name.to_s
 
           if async_method?(method_string)
-            Agent.do_async(self, method_string, *args)
+            Agent.do_async(self, method_string, nil, *args)
           else
             super
           end
@@ -43,21 +43,22 @@ module Tourkrub
 
       class Agent
         class << self
-          def do_async(originator, method_string, *args)
-            new(originator, method_string, *args).do_async
+          def do_async(originator, method_string, queue, *args)
+            new(originator, method_string, queue, *args).do_async
           end
         end
 
-        attr_reader :originator, :method_string, :args
+        attr_reader :originator, :method_string, :queue, :args
 
-        def initialize(originator, method_string, *args)
+        def initialize(originator, method_string, queue, *args)
           @originator = originator
           @method_string = method_string
+          @queue = queue || "default"
           @args = *args
         end
 
         def do_async
-          worker.perform_async(dumped_self)
+          worker.set(queue: queue).perform_async(dumped_self)
         end
 
         def do
