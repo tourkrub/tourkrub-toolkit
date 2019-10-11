@@ -62,10 +62,18 @@ module Tourkrub
         end
 
         def do
-          originator.send(original_method, *args)
+          if method_info.parameters.count.positive?
+            originator.send(original_method, *args)
+          else
+            originator.send(original_method)
+          end
         end
 
         private
+
+        def method_info
+          originator.method(original_method)
+        end
 
         def original_method
           method_string.gsub("_async", "")
