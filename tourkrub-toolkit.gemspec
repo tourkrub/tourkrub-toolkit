@@ -2,11 +2,11 @@
 
 lib = File.expand_path("lib", __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "tourkrub/toolkit/version"
+require "tourkrub_toolkit/version"
 
 Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.name          = "tourkrub-toolkit"
-  spec.version       = Tourkrub::Toolkit::VERSION
+  spec.version       = TourkrubToolkit::VERSION
   spec.authors       = ["Sittitep Tosuwan"]
   spec.email         = ["sittitep.tos@tourkrub.co"]
 
