@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-RSpec.describe Tourkrub::Toolkit::ServiceObject do
+RSpec.describe TourkrubToolkit::ServiceObject do
   before(:all) do
     class ServiceObjectSpec
-      include Tourkrub::Toolkit::ServiceObject
+      include TourkrubToolkit::ServiceObject
 
       declare_input do
         attribute :value, Types::Strict::Integer

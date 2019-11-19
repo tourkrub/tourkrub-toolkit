@@ -1,4 +1,4 @@
-# Tourkrub::Toolkit
+# TourkrubToolkit
 
 ## Installation
 
@@ -22,7 +22,7 @@ Or install it yourself as:
 
 ```
 class AddOneService
-    include Tourkrub::Toolkit::ServiceObject
+    include TourkrubToolkit::ServiceObject
     
     declare_input do
         attribute :value, Types::Strict::Integer
