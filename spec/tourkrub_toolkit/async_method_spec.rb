@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-RSpec.describe Tourkrub::Toolkit::AsyncMethod do
+RSpec.describe TourkrubToolkit::AsyncMethod do
   before(:all) do
     class TestAsyncMethod
-      include Tourkrub::Toolkit::AsyncMethod
+      include TourkrubToolkit::AsyncMethod
 
       def initialize(bar)
         @bar = bar

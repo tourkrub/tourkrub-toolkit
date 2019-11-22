@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-RSpec.describe Tourkrub::Toolkit::ServiceAssembly do
+RSpec.describe TourkrubToolkit::ServiceAssembly do
   before(:all) do
     class AddoneServiceObjectSpec
-      include Tourkrub::Toolkit::ServiceObject
+      include TourkrubToolkit::ServiceObject
 
       declare_input do
         attribute :value, Types::Strict::Integer
@@ -21,7 +21,7 @@ RSpec.describe Tourkrub::Toolkit::ServiceAssembly do
     end
 
     class SumAllServiceAssemblySpec
-      include Tourkrub::Toolkit::ServiceAssembly
+      include TourkrubToolkit::ServiceAssembly
 
       declare_input do
         attribute :start_value, Types::Strict::Integer
@@ -40,7 +40,7 @@ RSpec.describe Tourkrub::Toolkit::ServiceAssembly do
     end
 
     class ToBreakServiceAssemblySpec
-      include Tourkrub::Toolkit::ServiceAssembly
+      include TourkrubToolkit::ServiceAssembly
 
       declare_input do
         attribute :start_value, Types::Strict::Integer

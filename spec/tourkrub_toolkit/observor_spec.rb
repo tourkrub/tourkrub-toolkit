@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Tourkrub::Toolkit::Observor do
+RSpec.describe TourkrubToolkit::Observor do
   before do
     class FooBarReaction
       def self.baz(arg)
@@ -19,7 +19,7 @@ RSpec.describe Tourkrub::Toolkit::Observor do
     describe "#observe" do
       before do
         class ObservorSpec
-          include Tourkrub::Toolkit::Observor
+          include TourkrubToolkit::Observor
 
           observe on: FooObservable, action: "bar", reaction: proc { |result| FooBarReaction.baz(result) }
         end
@@ -39,7 +39,7 @@ RSpec.describe Tourkrub::Toolkit::Observor do
     describe "#observe" do
       before do
         class ObservorSpec
-          include Tourkrub::Toolkit::Observor
+          include TourkrubToolkit::Observor
 
           observe on: FooObservable, action: "bar" do |result|
             FooBarReaction.baz(result)
@@ -62,21 +62,21 @@ RSpec.describe Tourkrub::Toolkit::Observor do
       it "should raise" do
         expect  do
           class ObservorSpec
-            include Tourkrub::Toolkit::Observor
+            include TourkrubToolkit::Observor
 
             observe on: FooObservable.new, action: "bar", reaction: proc { |result| FooBarReaction.baz(result) }
           end
-        end.to raise_error(Tourkrub::Toolkit::Observor::IsNotObservable)
+        end.to raise_error(TourkrubToolkit::Observor::IsNotObservable)
       end
     end
   end
 
   context "disabled" do
     before do
-      Tourkrub::Toolkit::Observor.disable!
+      TourkrubToolkit::Observor.disable!
 
       class ObservorSpec
-        include Tourkrub::Toolkit::Observor
+        include TourkrubToolkit::Observor
 
         observe on: FooObservable, action: "bar" do |result|
           FooBarReaction.baz(result)
