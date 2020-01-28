@@ -38,7 +38,7 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.require_paths = ["lib"]
 
   spec.add_dependency "dry-struct", "~> 1.0.0"
-  spec.add_dependency "sidekiq", "~> 5.2.7"
+  spec.add_dependency "sidekiq", ">= 5.2.7"
 
   spec.add_development_dependency "bundler", "~> 2.0"
   spec.add_development_dependency "byebug", "~> 11.0.1"
