@@ -37,13 +37,13 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "dry-struct", "~> 1.3.0"
-  spec.add_dependency "sidekiq", ">= 5.2.7"
+  spec.add_dependency "dry-struct", "~> 1.6.0"
+  spec.add_dependency "sidekiq", ">= 7.1.0"
 
-  spec.add_development_dependency "bundler", "~> 2.0"
-  spec.add_development_dependency "byebug", "~> 11.0.1"
-  spec.add_development_dependency "rake", "~> 13.0"
-  spec.add_development_dependency "rspec", "~> 3.0"
-  spec.add_development_dependency "rubocop", "~> 0.62.0"
-  spec.add_development_dependency "simplecov", "~> 0.16.1"
+  spec.add_development_dependency "bundler", "~> 2"
+  spec.add_development_dependency "byebug", "~> 11"
+  spec.add_development_dependency "rake", "~> 13"
+  spec.add_development_dependency "rspec", "~> 3"
+  spec.add_development_dependency "rubocop", "~> 1"
+  spec.add_development_dependency "simplecov", "~> 0.22"
 end
